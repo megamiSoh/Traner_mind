@@ -1,0 +1,10 @@
+export const SIGN_IN = "/signin";
+export const HOME = "/home";
+export const MARCKETCREATE = "/marcketcreate";
+export const MARCKETMANAGE = "/marcketmanage";
+export const INFO = "/info";
+export const INFODETAIL = "/infodetail";
+export const REVENUERESULT = "/revenueresult";
+export const REVENUECALENDAR = "/revenuecalendar";
+export const CASEMANAGE = "/casemanage";
+export const CASEDETAIL = "/casemanage/detail";
