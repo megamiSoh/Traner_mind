@@ -4,19 +4,19 @@ import "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-export const cardInfo = id => {
+export const getData = id => {
   return database.ref(`/${id}`);
 };
-export const post = ({ ...rest }) => {
+export const post = (id, { ...rest }) => {
   var postData = {
     ...rest
   };
-  console.log(postData[0]);
+  console.log(postData);
   var newPostKey = database
     .ref()
     .child("posts")
     .push().key;
   var updates = {};
-  updates["/posts/" + newPostKey] = postData;
+  updates[`/posts/${id} /` + newPostKey] = postData;
   return database.ref().update(updates);
 };
