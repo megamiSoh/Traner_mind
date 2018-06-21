@@ -23,8 +23,10 @@ import RegistMember from "./RegistMember";
 import CalendarSearch from "./CalendarSearch";
 import MobileTable from "./MobileTable";
 import CaseDetail from "./CaseDetail";
+import RevenueSum from "./RevenueSum";
 import { BackBtn, RegstBtn, SearchBtn } from "./Btn";
 export {
+  RevenueSum,
   BackBtn,
   RegstBtn,
   SearchBtn,
