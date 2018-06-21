@@ -8,12 +8,11 @@ const GETPENDING = "GETPENDING";
 // export const getList = createAction(GETLIST);
 export const getList = id => dispatch => {
   dispatch({ type: GETPENDING });
-  return database.cardInfo(id).on("value", function(snapshot) {
-    console.log(snapshot.exists());
+  return database.getData(id).on("value", function(snapshot) {
     if (snapshot.exists()) {
       dispatch({
         type: GETLIST,
-        payload: Object.values(snapshot.val())
+        payload: snapshot.val()
       });
     } else {
       dispatch({
