@@ -26,44 +26,67 @@ const OriginChildMenu = ({ id, number, onToggle, activeTab }) => (
     </NavLink>
   </NavItem>
 );
-const OriginChildComponent = ({
-  id,
-  number,
-  onToggle,
-  activeTab,
-  name,
-  email,
-  contact,
-  typeName,
-  typeEmail,
-  typeContact
-}) => (
-  <div className="createTabStyle">
-    <TabContent activeTab={activeTab}>
-      <TabPane tabId={id}>
-        <Row>
-          <Label sm={3}>사장명{number}</Label>
-          <Col sm={9}>
-            <Input onChange={name} name={typeName} />
-          </Col>
-        </Row>
-        <Row>
-          <Label sm={3}>전화번호</Label>
-          <Col sm={9}>
-            <Input onChange={contact} name={typeContact} />
-          </Col>
-        </Row>
-        <Row>
-          <Label sm={3}>이메일</Label>
-          <Col sm={9}>
-            <Input onChange={email} name={typeEmail} />
-          </Col>
-        </Row>
-      </TabPane>
-    </TabContent>
+class OriginChildComponent extends React.Component {
+  state = {
+    name: "",
+    contact: "",
+    email: "",
+    id: 1
+  };
 
-    {/* </span> */}
-  </div>
-);
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.inputValue(this.state);
+  };
+  render() {
+    const {
+      id,
+      number,
+      activeTab,
+      typeName,
+      typeEmail,
+      typeContact
+    } = this.props;
+    return (
+      <form>
+        <div className="createTabStyle">
+          <TabContent activeTab={activeTab}>
+            <TabPane tabId={id}>
+              <Row>
+                <Label sm={3}>사장명{number}</Label>
+                <Col sm={9}>
+                  <Input onChange={this.handleChange} name={typeName} />
+                </Col>
+              </Row>
+              <Row>
+                <Label sm={3}>전화번호</Label>
+                <Col sm={9}>
+                  <Input onChange={this.handleChange} name={typeContact} />
+                </Col>
+              </Row>
+              <Row>
+                <Label sm={3}>이메일</Label>
+                <Col sm={9}>
+                  <Input onChange={this.handleChange} name={typeEmail} />
+                </Col>
+              </Row>
+            </TabPane>
+          </TabContent>
+        </div>
+      </form>
+    );
+  }
+  handleChange = e => {
+    this.setState(
+      {
+        [e.target.name]: e.target.value,
+        id: this.props.id
+      },
+      () => {
+        this.props.inputValue(this.state);
+      }
+    );
+  };
+}
 
 export { MarcketCreateTab, OriginChildComponent, OriginChildMenu };
