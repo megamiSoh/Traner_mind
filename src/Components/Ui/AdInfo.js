@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col, Input } from "reactstrap";
-const AdInfo = () => (
+const AdInfo = ({ fileRegist, id }) => (
   <div className="AdminWrap">
     <Row>
       <Col sm="4" className="infoWrap">
@@ -11,7 +11,7 @@ const AdInfo = () => (
           placeholder="내용을 입력해주세요."
         />
 
-        <input type="file" />
+        <input type="file" onChange={fileRegist} id={id} />
       </Col>
       <Col sm="4" className="infoWrap">
         <Input placeholder="제목" />
@@ -20,7 +20,7 @@ const AdInfo = () => (
           className="infoText"
           placeholder="내용을 입력해주세요."
         />
-        <input type="file" />
+        <input type="file" onChange={fileRegist} id={id} />
       </Col>
       <Col sm="4" className="infoWrap">
         <Input placeholder="제목" />
@@ -29,7 +29,7 @@ const AdInfo = () => (
           className="infoText"
           placeholder="내용을 입력해주세요."
         />
-        <input type="file" />
+        <input type="file" onChange={fileRegist} id={id} />
       </Col>
     </Row>
   </div>
