@@ -2,7 +2,7 @@ import React from "react";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
 import { SearchBtn } from "./Btn";
-import { Col, Form, FormGroup, Label, Input } from "reactstrap";
+import { Col, Form, FormGroup, Label } from "reactstrap";
 import MomentLocaleUtils, {
   formatDate,
   parseDate
@@ -49,28 +49,6 @@ const SearchBox = ({ onStartDay, onEndDay }) => {
         </FormGroup>
       </Form>
       <Form inline>
-        <FormGroup>
-          <Label className="mb-2 mr-sm-2 mb-sm-0">매출액</Label>
-          <Input id="revenue" />
-          <span className="title">(순수매출 - 순수취소)</span>
-        </FormGroup>
-      </Form>
-      <Form inline>
-        {/* <FormGroup>
-          <Label className="mb-2 mr-sm-2 mb-sm-0">매출액</Label>
-          <Input id="revenue" />
-        </FormGroup>
-        <FormGroup>
-          <span>(순수매출 - 순수취소)</span>
-        </FormGroup> */}
-        <FormGroup>
-          <Label className="mb-2 mr-sm-2 mb-sm-0">순수매출</Label>
-          <Input />
-        </FormGroup>
-        <FormGroup>
-          <Label className="mb-2 mr-sm-2 mb-sm-0">순수취소</Label>
-          <Input />
-        </FormGroup>
         <Col>
           <div className="SearchBtnWrap">
             <SearchBtn />
