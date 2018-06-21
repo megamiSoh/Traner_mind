@@ -10,5 +10,5 @@ const RegstBtn = ({ btn, onClick }) => (
     {btn}
   </button>
 );
-const SearchBtn = () => <button className="SearchBtn">검색</button>;
+const SearchBtn = handleClick => <button className="SearchBtn">검색</button>;
 export { BackBtn, RegstBtn, SearchBtn };
