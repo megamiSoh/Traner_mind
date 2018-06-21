@@ -108,7 +108,7 @@ class MarcketInfoDetail extends Component {
         </div>
         <div className="MCreateWrap line">
           <Col className="MCreateLeft">
-            <Remark />
+            <Remark title={"특이사항"} />
           </Col>
           <Col className="MCreateRight">
             <RegistMember />
