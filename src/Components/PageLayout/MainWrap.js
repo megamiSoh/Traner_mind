@@ -2,7 +2,8 @@ import {
   CardRevenue,
   CancelCardRevenue,
   GymRevenue,
-  CancelGymRevenue
+  CancelGymRevenue,
+  RevenueSum
 } from "../Ui";
 import React from "react";
 import { TabContent, TabPane, Nav, NavItem, NavLink, Col } from "reactstrap";
@@ -26,9 +27,22 @@ export default class MainWrap extends React.Component {
     }
   }
   render() {
-    const { cardRevenue, gymRevenue } = this.props;
+    const {
+      cardRevenue,
+      cancleCard,
+      gymRevenue,
+      gymCancle,
+      totalSum,
+      totalRevenue,
+      totalCancel
+    } = this.props;
     return (
       <div className="MainNavi">
+        <RevenueSum
+          totalSum={totalSum}
+          totalRevenue={totalRevenue}
+          totalCancel={totalCancel}
+        />
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -75,60 +89,52 @@ export default class MainWrap extends React.Component {
           <TabPane tabId="1">
             <Col className="mainConWrap">
               {cardRevenue.map((item, key) => {
-                return item.cardList.map((card, key) => {
-                  return (
-                    <CardRevenue
-                      name={card.name}
-                      revenue={card.revenue}
-                      key={key}
-                    />
-                  );
-                });
+                return (
+                  <CardRevenue
+                    name={item.name}
+                    revenue={item.revenue}
+                    key={key}
+                  />
+                );
               })}
             </Col>
           </TabPane>
           <TabPane tabId="2">
             <Col className="mainConWrap">
-              {cardRevenue.map((item, key) => {
-                return item.cardCancelList.map((card, key) => {
-                  return (
-                    <CancelCardRevenue
-                      name={card.name}
-                      revenue={card.revenue}
-                      key={key}
-                    />
-                  );
-                });
+              {cancleCard.map((item, key) => {
+                return (
+                  <CancelCardRevenue
+                    name={item.name}
+                    revenue={item.cancel}
+                    key={key}
+                  />
+                );
               })}
             </Col>
           </TabPane>
           <TabPane tabId="3">
             <Col className="mainConWrap">
               {gymRevenue.map((item, key) => {
-                return item.gymList.map((gym, key) => {
-                  return (
-                    <GymRevenue
-                      name={gym.name}
-                      revenue={gym.revenue}
-                      key={key}
-                    />
-                  );
-                });
+                return (
+                  <GymRevenue
+                    name={item.name}
+                    revenue={item.revenue}
+                    key={key}
+                  />
+                );
               })}
             </Col>
           </TabPane>
           <TabPane tabId="4">
             <Col className="mainConWrap">
-              {gymRevenue.map((item, key) => {
-                return item.gymCancelList.map((gym, key) => {
-                  return (
-                    <CancelGymRevenue
-                      name={gym.name}
-                      revenue={gym.revenue}
-                      key={key}
-                    />
-                  );
-                });
+              {gymCancle.map((item, key) => {
+                return (
+                  <CancelGymRevenue
+                    name={item.name}
+                    revenue={item.cancel}
+                    key={key}
+                  />
+                );
               })}
             </Col>
           </TabPane>
