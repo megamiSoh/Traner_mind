@@ -8,7 +8,9 @@ import {
   OriginChildMenu,
   RegstBtn
 } from "../../Components/Ui";
-import { database } from "../../Lib/Firebase";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import * as postListActions from "../../Modules/postList";
 import { Nav, NavItem, Container, Col, NavLink } from "reactstrap";
 class MarcketWrap extends Component {
   constructor(props) {
@@ -18,37 +20,61 @@ class MarcketWrap extends Component {
     this.state = {
       activeTab: 1,
       numChildren: 3,
-      ceoList: [
-        {
-          name: "megami",
-          contact: "010401",
-          email: "rekagirl@naver.com",
-          id: "1"
-        }
-      ]
+      postData: []
     };
-    this.inputValue = this.inputValue.bind(this);
   }
   toggle = tab => {
-    console.log(tab);
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
       });
     }
-    console.log(this.state.activeTab);
   };
-  handleSubmit = e => {
-    console.log(e);
-    console.log(this.state.ceoList);
-    database.post(this.state.ceoList);
+  handleSubmit = async e => {
+    // database.post("marcketCreate", this.state.postData);
+    const { postListActions } = this.props;
+    try {
+      await postListActions.postList("marcketCreate", this.state.postData);
+    } catch (e) {
+      console.log(this.props.err);
+    }
   };
-  inputValue = e => {
-    // console.log(e.target.name);
-    // this.setState({
-    //   ceoList: this.state.ceoList.concat({ e.target.value: e.target.value })
-    // });
-    // console.log(this.state.ceoList);
+  inpoInputValue = e => {
+    this.setState({
+      postData: {
+        ...this.state.postData,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+  inpoSecInputValue = e => {
+    this.setState({
+      postData: {
+        ...this.state.postData,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
+  AreaValue = e => {
+    this.setState(
+      {
+        postData: {
+          ...this.state.postData,
+          [e.target.name]: e.target.value
+        }
+      },
+      () => {
+        return this.state.postData.textArea;
+      }
+    );
+  };
+  inputValue = data => {
+    this.setState({
+      postData: {
+        ...this.state.postData,
+        [`ceoList${data.id}`]: [{ ...data }]
+      }
+    });
   };
   onAddChild = () => {
     if (this.state.numChildren < 6) {
@@ -71,9 +97,8 @@ class MarcketWrap extends Component {
           onToggle={this.toggle}
           id={i}
           className={i}
-          name={this.inputValue}
-          contact={this.inputValue}
-          email={this.inputValue}
+          inputValue={this.inputValue}
+          input={this.inputValue}
           typeName={"name"}
           typeEmail={"email"}
           typeContact={"contact"}
@@ -89,9 +114,7 @@ class MarcketWrap extends Component {
           onToggle={this.toggle}
           id={x}
           className={x}
-          name={this.inputValue}
-          contact={this.inputValue}
-          email={this.inputValue}
+          input={this.inputValue}
           typeName={"name"}
           typeEmail={"email"}
           typeContact={"contact"}
@@ -100,10 +123,21 @@ class MarcketWrap extends Component {
     }
     return (
       <Container className="MCreate">
+        {/* <form> */}
         <span className="Alltitle">상점 생성</span>
         <div className="MCreateWrap">
           <div className="MCreateLeft">
-            <MarcketCreateInfoFirst />
+            <MarcketCreateInfoFirst
+              inpoInputValue={this.inpoInputValue}
+              typeMarcket={"marcket"}
+              typeContact={"contact"}
+              typeCorporateNum={"corporateNum"}
+              typeBusiness={"BusinessType"}
+              typeBank={"bank"}
+              typeFranchise={"franchise"}
+              typeCorporIndi={"CorporOrIndi"}
+              defaultValue={"individual"}
+            />
           </div>
           <div className="MCreateRight">
             <Nav tabs>
@@ -117,20 +151,39 @@ class MarcketWrap extends Component {
             {children}
             <span className="alertText">* 최대 5개까지만 추가 가능합니다.</span>
             <div className="secondInfo">
-              <MarcketCreateInfoSecond />
+              <MarcketCreateInfoSecond
+                inpoInputValue={this.inpoSecInputValue}
+                typeAccountNum={"account"}
+                typeRoute={"route"}
+              />
             </div>
           </div>
         </div>
         <div className="MCreateFoot line">
           <Col>
-            <Remark />
+            <Remark
+              title={"특이사항"}
+              inputValue={this.AreaValue}
+              typeTextArea={"textArea"}
+            />
           </Col>
           <div className="btnWrap">
             <RegstBtn btn={"등록하기"} onClick={this.handleSubmit} />
           </div>
         </div>
+        {/* </form> */}
       </Container>
     );
   }
 }
-export default MarcketWrap;
+// export default MarcketWrap;
+export default connect(
+  state => ({
+    data: state.postList.data,
+    err: state.postList.err,
+    pending: state.getList.pending
+  }),
+  dispatch => ({
+    postListActions: bindActionCreators(postListActions, dispatch)
+  })
+)(MarcketWrap);
