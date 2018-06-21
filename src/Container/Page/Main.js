@@ -11,54 +11,14 @@ class Main extends Component {
     this.state = {
       cardInfo: null,
       selectedDay: null,
-      revenueGymList: [
-        {
-          gymList: [
-            { name: "회원권", revenue: 100000000 },
-            { name: "PT", revenue: 10000000 },
-            { name: "필라테스", revenue: 1000000 },
-            { name: "골프", revenue: 100000 },
-            { name: "운동복", revenue: 10000 },
-            { name: "락커", revenue: 1000 },
-            { name: "위약금", revenue: 100 },
-            { name: "기타", revenue: 10 }
-          ],
-          gymCancelList: [
-            { name: "회원권", revenue: 200000000 },
-            { name: "PT", revenue: 20000000 },
-            { name: "필라테스", revenue: 2000000 },
-            { name: "골프", revenue: 200000 },
-            { name: "운동복", revenue: 20000 },
-            { name: "락커", revenue: 2000 },
-            { name: "위약금", revenue: 200 },
-            { name: "기타", revenue: 20 }
-          ]
-        }
-      ],
-      revenueList: [
-        {
-          cardList: [
-            { name: "롯데카드", revenue: 100000000 },
-            { name: "신한카드", revenue: 10000000 },
-            { name: "하나카드", revenue: 1000000 },
-            { name: "삼성카드", revenue: 100000 },
-            { name: "외환카드", revenue: 10000 },
-            { name: "비씨카드", revenue: 1000 },
-            { name: "농협카드", revenue: 100 },
-            { name: "기업카드", revenue: 10 }
-          ],
-          cardCancelList: [
-            { name: "롯데카드", revenue: 200000000 },
-            { name: "신한카드", revenue: 20000000 },
-            { name: "하나카드", revenue: 2000000 },
-            { name: "삼성카드", revenue: 200000 },
-            { name: "외환카드", revenue: 20000 },
-            { name: "비씨카드", revenue: 2000 },
-            { name: "농협카드", revenue: 200 },
-            { name: "기업카드", revenue: 20 }
-          ]
-        }
-      ]
+      Revenue: {},
+      gymList: [],
+      gymCancelList: [],
+      cardList: [],
+      cardCancelList: [],
+      totalSum: "",
+      totalRevenue: "",
+      totalCancel: ""
     };
   }
   handleSelect(day) {
@@ -69,14 +29,16 @@ class Main extends Component {
     console.log(day);
   }
   componentDidMount() {
-    this.getList("CardInfo");
+    this.getList("Revenue");
+    console.log(1);
   }
   componentWillReceiveProps(nextProps) {
     if (
       this.props.data === undefined ||
       JSON.stringify(this.props.data) !== JSON.stringify(nextProps.data)
     ) {
-      this.getList("CardInfo");
+      this.getList("Revenue");
+      console.log(2);
     }
   }
   getList = async id => {
@@ -84,14 +46,22 @@ class Main extends Component {
     try {
       await GetListActions.getList(id);
       console.log("complete");
-      console.log(this.props.data);
+      this.setState({
+        Revenue: this.props.data,
+        cardList: this.props.data.CardRevenue.Card,
+        cardCancelList: this.props.data.CardRevenue.CardCancel,
+        gymList: this.props.data.GymRevenue.Gym,
+        gymCancelList: this.props.data.GymRevenue.GymCancel,
+        totalSum: this.props.data.TotalRevenue,
+        totalRevenue: this.props.data.PureRevenue,
+        totalCancel: this.props.data.PureCancel
+      });
     } catch (e) {
       console.log(this.props.error);
     }
   };
 
   render() {
-    // const { data } = this.props;
     return (
       <Container>
         <span className="Alltitle En">HOME</span>
@@ -101,13 +71,14 @@ class Main extends Component {
         />
         <div className="revenuWrap">
           <MainWrap
-            cardRevenue={this.state.revenueList}
-            gymRevenue={this.state.revenueGymList}
+            cardRevenue={this.state.cardList}
+            cancleCard={this.state.cardCancelList}
+            gymRevenue={this.state.gymList}
+            gymCancle={this.state.gymCancelList}
+            totalSum={this.state.totalSum}
+            totalRevenue={this.state.totalRevenue}
+            totalCancel={this.state.totalCancel}
           />
-        </div>
-        <div>
-          {console.log(this.props.pending)}
-          {this.props.error ? "error" : this.props.data}
         </div>
       </Container>
     );
