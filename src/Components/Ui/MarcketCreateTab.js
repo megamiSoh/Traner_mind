@@ -10,7 +10,6 @@ import {
   Input
 } from "reactstrap";
 import classnames from "classnames";
-
 const MarcketCreateTab = props => (
   <div className="AddBtnOrigin" onClick={props.addChild}>
     추가
@@ -29,7 +28,7 @@ const OriginChildMenu = ({ id, number, onToggle, activeTab }) => (
 class OriginChildComponent extends React.Component {
   state = {
     name: "",
-    contact: "",
+    ceoContact: "",
     email: "",
     id: 1
   };

@@ -6,6 +6,7 @@ $navy: #003d5b;
 $purple: #a957aa;
 $black: #000;
 $white: #fff;
+$gray: #c0bfbf;
 $Tpurple: #a957aa4a;
 $Tgreen: #01948912;
 $Tred: #d1495b14;
@@ -329,7 +330,6 @@ body {
   border-radius: 5px;
   padding: 1rem;
   text-align: center;
-  width: 30%;
   min-width: 250px;
   margin: 10px auto;
 
@@ -488,6 +488,11 @@ body {
       font-weight: bold;
     }
   }
+}
+.pointColor {
+  font-size: 12px;
+  color: $red;
+  font-weight: bold;
 }
 .tableWrap {
   overflow-x: auto;
@@ -648,10 +653,14 @@ body {
     line-height: 49px;
   }
 }
-.form-control:disabled,
-.form-control[readonly] {
-  background-color: $white;
+.form-control {
+  font-size: 12px;
 }
+.form-control:focus {
+  border-color: #ced4da;
+  box-shadow: none;
+}
+
 .infoSelect {
   width: 100%;
 }
@@ -697,6 +706,211 @@ body {
   width: 100%;
   font-family: $Enfont;
 }
+.sumBoxWrap {
+  overflow: hidden;
+  padding: 0.5rem 0 2rem 0;
+  .sumBox {
+    float: left;
+    margin-left: 10px;
+    .sumText {
+      font-size: 13px;
+      color: $green;
+    }
+  }
+}
+.stylePadding {
+  padding: 5px 0 0;
+}
+.calendarInput {
+  padding: 7px;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  text-indent: 10px;
+  font-family: $Enfont;
+}
+.memo {
+  position: relative;
+  .memoContents {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid black;
+    padding: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: -25%;
+    margin-top: 6rem;
+    max-width: 500px;
+  }
+}
+.btn-group-sm > .btn,
+.btn-sm {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.675rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+.modal-content {
+  // max-width: 900px;
+}
+.modal-body {
+  .col-form-label {
+    font-size: 13px;
+  }
+}
+.modal {
+  .modal-dialog {
+    width: 100%;
+    max-width: 1155px;
+  }
+  .tableWrap {
+    .last {
+      display: none;
+    }
+  }
+}
+.rbc-row {
+  .rbc-date-cell {
+    border-bottom: 1px solid #ddd;
+  }
+  .rbc-event {
+    background-color: #fff;
+    padding: 0;
+    color: $navy;
+    font-weight: bold;
+    text-align: right;
+    font-size: 12px;
+    margin-right: 1px;
+  }
+  .rbc-event.rbc-selected {
+    background-color: #fff;
+  }
+
+  .rbc-event-content {
+    min-height: 50px;
+    &:before {
+      content: "";
+      display: inline-block;
+      width: 9px;
+      height: 10px;
+      background-color: $green;
+      margin-right: 3px;
+    }
+  }
+}
+.tooltip-inner {
+  max-width: 200px;
+  padding: 0.25rem 0.5rem;
+  color: #000;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 0.25rem;
+  border: 1px solid black;
+}
+.rbc-row-segment a {
+  display: block;
+}
+.toolTable {
+  border: 1px solid $black;
+  th {
+    border: 1px solid $black;
+    padding: 5px 10px;
+    font-size: 13px;
+    background-color: $Tgreen;
+  }
+  td {
+    border: 1px solid $black;
+    font-size: 12px;
+    padding: 3px 0;
+  }
+}
+.employeeTableWrap {
+  margin-top: 25px;
+  width: 100%;
+  border-top: 1px solid $gray;
+  border-left: 1px solid $gray;
+  text-align: center;
+  th {
+    border-bottom: 1px solid $gray;
+    border-right: 1px solid $gray;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 7px;
+    background-color: $Tgreen;
+  }
+  td {
+    padding: 10px;
+    font-size: 13px;
+    border-bottom: 1px solid $gray;
+    border-right: 1px solid $gray;
+  }
+}
+.graybtnStyle {
+  font-weight: normal !important;
+  font-size: 14px;
+  float: right;
+}
+.employeeRegsitWrap {
+  overflow: hidden;
+  margin-bottom: 10px;
+  border-left: 1.5px solid $gray;
+  width: 100%;
+  .checkboxStyle {
+    width: 14%;
+    box-sizing: border-box;
+  }
+  .lastBox {
+    width: 6%;
+    box-sizing: border-box;
+    text-align: center;
+    line-height: 70px;
+  }
+  p {
+    float: left;
+    border-top: 1.5px solid $gray;
+    border-bottom: 1.5px solid $gray;
+    border-right: 1.5px solid $gray;
+    margin-bottom: 0;
+    min-height: 81px;
+    width: 20%;
+    box-sizing: border-box;
+
+    span {
+      display: block;
+      padding: 0 5px;
+    }
+    .checkStyle {
+      text-align: center;
+      line-height: 35px;
+    }
+    label {
+      padding-right: 3px;
+      display: inline-block;
+      width: 100%;
+      font-size: 13px;
+      min-height: 32px;
+      text-align: center;
+      border-bottom: 1px solid $gray;
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+      .btn {
+        float: right;
+      }
+    }
+  }
+}
+
+.rightBtn {
+  float: right;
+  display: block;
+  margin-bottom: 5px;
+}
+.hidden {
+  display: none;
+}
+.show {
+  display: block;
+}
 
 @media (max-width: 575px) {
   .infoWrap {
@@ -706,5 +920,30 @@ body {
   .infoWrap:first-child {
     border: 0;
     padding-top: 0;
+  }
+  .employeeRegsitWrap {
+    border: 1.5px solid gray;
+    p {
+      width: 100%;
+      border-bottom: 0;
+      border-top: 0;
+      border-right: 0;
+
+      label {
+        text-align: left;
+        text-indent: 10px;
+      }
+    }
+    .checkboxStyle {
+      width: 100%;
+    }
+    .lastBox {
+      width: 100%;
+      min-height: 29px;
+      line-height: 0;
+      .btn {
+        width: 100%;
+      }
+    }
   }
 }

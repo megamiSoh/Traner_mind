@@ -1,5 +1,4 @@
-import { database } from "./firebase";
-// import firebase from "firebase/app";
+import { database, createDate } from "./firebase";
 import "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
@@ -7,16 +6,13 @@ import "firebase/firestore";
 export const getData = id => {
   return database.ref(`/${id}`);
 };
-export const post = (id, { ...rest }) => {
-  var postData = {
-    ...rest
-  };
-  console.log(postData);
+export const post = (title, { ...rest }) => {
+  var postData = { createDate, ...rest };
   var newPostKey = database
     .ref()
-    .child("posts")
+    .child(title)
     .push().key;
   var updates = {};
-  updates[`/posts/${id} /` + newPostKey] = postData;
+  updates[`${title} /` + newPostKey] = postData;
   return database.ref().update(updates);
 };

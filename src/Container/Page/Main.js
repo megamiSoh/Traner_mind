@@ -11,6 +11,7 @@ class Main extends Component {
     this.state = {
       cardInfo: null,
       selectedDay: null,
+      RevenueList: [],
       Revenue: {},
       gymList: [],
       gymCancelList: [],
@@ -28,24 +29,32 @@ class Main extends Component {
   handleSelectEnd(day) {
     console.log(day);
   }
+  // shouldComponentUpdate(nextProps) {
+  //   console.log(nextProps.data);
+  //   return true;
+  //   // if (JSON.stringify(this.props.data) !== JSON.stringify(nextProps.data)) {
+  //   //   return true;
+  //   // } else {
+  //   //   return false;
+  //   // }
+  // }
   componentDidMount() {
     this.getList("Revenue");
-    console.log(1);
+    // console.log(this.props.data);
   }
   componentWillReceiveProps(nextProps) {
+    // console.log(this.props.data);
     if (
-      this.props.data === undefined ||
+      // this.props.data === undefined ||
       JSON.stringify(this.props.data) !== JSON.stringify(nextProps.data)
     ) {
       this.getList("Revenue");
-      console.log(2);
     }
   }
-  getList = async id => {
+  async getList(id) {
     const { GetListActions } = this.props;
+    await GetListActions.getList(id);
     try {
-      await GetListActions.getList(id);
-      console.log("complete");
       this.setState({
         Revenue: this.props.data,
         cardList: this.props.data.CardRevenue.Card,
@@ -57,9 +66,9 @@ class Main extends Component {
         totalCancel: this.props.data.PureCancel
       });
     } catch (e) {
-      console.log(this.props.error);
+      console.log(e);
     }
-  };
+  }
 
   render() {
     return (
@@ -84,13 +93,11 @@ class Main extends Component {
     );
   }
 }
-// export default Main;
 export default connect(
   state => ({
     data: state.getList.getList,
     error: state.getList.error,
     pending: state.getList.pending
-    // data: getList.get("getList")
   }),
   dispatch => ({
     GetListActions: bindActionCreators(GetListActions, dispatch)

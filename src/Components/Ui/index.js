@@ -1,4 +1,4 @@
-// import ModalConfirm from "./Modal";
+import ShowModal from "./Modal";
 import SearchBox from "./SearchBox";
 import { CardRevenue, CancelCardRevenue } from "./CardRevenue";
 import { GymRevenue, CancelGymRevenue } from "./GymRevenue";
@@ -24,8 +24,29 @@ import CalendarSearch from "./CalendarSearch";
 import MobileTable from "./MobileTable";
 import CaseDetail from "./CaseDetail";
 import RevenueSum from "./RevenueSum";
-import { BackBtn, RegstBtn, SearchBtn } from "./Btn";
+import Memo from "./Memo";
+import CancelMemo from "./CancelMemo";
+import EmployeeRegist from "./EmployeeRegist";
+import ToolTipList from "./ToolTip";
+import EmployeeTable from "./EmployeeTable";
+import {
+  DeleteBtn,
+  GrayBtn,
+  BackBtn,
+  RegstBtn,
+  SearchBtn,
+  NormalBtn
+} from "./Btn";
 export {
+  DeleteBtn,
+  GrayBtn,
+  EmployeeTable,
+  ToolTipList,
+  ShowModal,
+  EmployeeRegist,
+  CancelMemo,
+  NormalBtn,
+  Memo,
   RevenueSum,
   BackBtn,
   RegstBtn,

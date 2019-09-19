@@ -14,7 +14,7 @@ const ManageList = ({ name, use, id, createDate, notUseDate }) => (
         )}
         {name}
       </span>
-      <div>{createDate}</div>
+      <div className="stylePadding">{createDate}</div>
       <div>미사용{notUseDate}</div>
       <div>
         <NavLink to={routes.INFODETAIL} className="marcketBtn">

@@ -1,8 +1,12 @@
 import React from "react";
 import { BackBtn, RegstBtn } from "../../Components/Ui";
+import CancelMemo from "./CancelMemo";
 import { ListGroup, ListGroupItem, Row, Col } from "reactstrap";
 import * as routes from "../../Constants/routes";
-const CaseDetail = () => (
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as btnAction from "../../Modules/btnAction";
+const CaseDetail = ({ show, btnAction }) => (
   <ListGroup>
     <ListGroupItem>
       <Row>
@@ -93,9 +97,28 @@ const CaseDetail = () => (
     <ListGroupItem>
       <div className="btnWrap">
         <BackBtn btn={"돌아가기"} location={routes.CASEMANAGE} />
-        <RegstBtn btn={"임의취소"} />
+        <RegstBtn btn={"임의취소"} onClick={() => btnAction.btnAction()} />
       </div>
     </ListGroupItem>
+    <CancelMemo
+      showMemo={!show}
+      handleMemo={() => {
+        btnAction.btnAction();
+        return !show;
+      }}
+      idTitle={"요청자 ID"}
+      title={"특이사항"}
+      btnTitle={"취소진행"}
+      memoTitle={"임의취소"}
+    />
   </ListGroup>
 );
-export default CaseDetail;
+export default connect(
+  state => ({
+    show: state.btn.get("show")
+  }),
+  dispatch => ({
+    btnAction: bindActionCreators(btnAction, dispatch)
+  })
+)(CaseDetail);
+// export default CaseDetail;

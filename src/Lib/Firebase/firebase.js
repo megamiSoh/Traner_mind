@@ -4,6 +4,7 @@ import "firebase/auth";
 import "firebase/firestore";
 import "firebase/database";
 import "firebase/storage";
+import "firebase/";
 
 const prodConfig = {
   apiKey: "AIzaSyDIzo1bny_HFmwvxOQYx_4BFgvSPJWCuGQ",
@@ -30,4 +31,5 @@ if (!firebase.apps.length) {
 const database = firebase.database();
 const auth = firebase.auth();
 const storage = firebase.storage();
-export { auth, database, storage };
+const createDate = firebase.database.ServerValue.TIMESTAMP;
+export { auth, database, storage, createDate };

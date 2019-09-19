@@ -8,7 +8,8 @@ import {
   OriginChildMenu,
   RegistMember,
   RegstBtn,
-  BackBtn
+  BackBtn,
+  EmployeeRegist
 } from "../../Components/Ui";
 import * as routes from "../../Constants/routes";
 import { Nav, NavItem, Container, Col, NavLink } from "reactstrap";
@@ -116,8 +117,15 @@ class MarcketInfoDetail extends Component {
         </div>
         <div className="btnWrap">
           <BackBtn btn={"돌아가기"} location={routes.MARCKETMANAGE} />
-          <RegstBtn btn={"등록"} />
+          <RegstBtn btn={"내용 변경"} />
         </div>
+        <EmployeeRegist
+          title={"임의등록"}
+          employeeId={"직원 ID"}
+          employeeName={"직원명"}
+          employeeContact={"전화번호"}
+          btnTitle={"직원등록"}
+        />
       </Container>
     );
   }

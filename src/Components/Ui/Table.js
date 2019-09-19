@@ -1,6 +1,6 @@
 import React from "react";
-
-const Table = ({ revenueList }) => (
+import { NormalBtn } from "./Btn";
+const Table = ({ revenueList, openMemo }) => (
   <div className="tableWrap">
     <table>
       <thead>
@@ -24,7 +24,7 @@ const Table = ({ revenueList }) => (
           <th rowSpan={2}>개월/횟수</th>
           <th rowSpan={2}>승인자</th>
           <th rowSpan={2}>취소자</th>
-          <th rowSpan={2} />
+          <th className="last" rowSpan={2} />
         </tr>
         <tr>
           <th>
@@ -53,8 +53,8 @@ const Table = ({ revenueList }) => (
               <td>{item.MonthCount}</td>
               <td>{item.ApprovalName}</td>
               <td>{item.CancelName}</td>
-              <td>
-                <button>메모보기</button>
+              <td className="last">
+                <NormalBtn onClick={openMemo} btn={"메모보기"} />
               </td>
             </tr>
           );
@@ -100,7 +100,7 @@ const Table = ({ revenueList }) => (
           <td />
           <td />
           <td />
-          <td />
+          <td className="last" />
         </tr>
       </tbody>
     </table>

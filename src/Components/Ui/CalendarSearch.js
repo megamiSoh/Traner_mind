@@ -23,7 +23,7 @@ class MonthBox extends React.Component {
   render() {
     return (
       <div className="box" onClick={this._handleClick}>
-        <Input value={this.state.value} readOnly />
+        <input className="calendarInput" value={this.state.value} readOnly />
       </div>
     );
   }
@@ -37,7 +37,7 @@ class CalendarSearch extends React.Component {
     super(props, context);
 
     this.state = {
-      mvalue: { year: 2018, month: 11 }
+      mvalue: { year: 2018, month: 7 }
       // mvalue2: { year: 2016, month: 7 },
       // mrange: { from: { year: 2014, month: 8 }, to: { year: 2015, month: 5 } },
       // mrange2: { from: { year: 2013, month: 11 }, to: { year: 2016, month: 3 } }

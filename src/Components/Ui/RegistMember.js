@@ -1,9 +1,19 @@
 import React from "react";
 import { RegstBtn } from "./Btn";
-const RegistMember = () => (
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as btnAction from "../../Modules/btnAction";
+const RegistMember = ({ show, btnAction }) => (
   <div className="registMemberWrap">
     <h1>
-      등록직원현황 <RegstBtn btn={"임의등록"} />
+      등록직원현황{" "}
+      <RegstBtn
+        btn={"임의등록"}
+        onClick={() => {
+          btnAction.btnAction();
+          return !show;
+        }}
+      />
     </h1>
     <div>
       <table>
@@ -25,5 +35,12 @@ const RegistMember = () => (
     </div>
   </div>
 );
-
-export default RegistMember;
+export default connect(
+  state => ({
+    show: state.btn.get("show")
+  }),
+  dispatch => ({
+    btnAction: bindActionCreators(btnAction, dispatch)
+  })
+)(RegistMember);
+// export default RegistMember;

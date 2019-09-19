@@ -4,11 +4,7 @@ import "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
-// Sign Up
-export const doCreateUserWithEmailAndPassword = (email, password) =>
-  auth.createUserWithEmailAndPassword(email, password);
-
-// Sign In
+// 로그인
 export const doSignInWithEmailAndPassword = (email, password) =>
   auth
     .setPersistence(firebase.auth.Auth.Persistence.SESSION)
@@ -16,7 +12,6 @@ export const doSignInWithEmailAndPassword = (email, password) =>
       return auth.signInWithEmailAndPassword(email, password);
     })
     .catch(function(error) {
-      // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
       console.log(errorCode);
@@ -24,10 +19,3 @@ export const doSignInWithEmailAndPassword = (email, password) =>
     });
 
 export const doSignOut = () => auth.signOut();
-
-// Password Reset
-export const doPasswordReset = email => auth.sendPasswordResetEmail(email);
-
-// Password Change
-export const doPasswordUpdate = password =>
-  auth.currentUser.updatePassword(password);

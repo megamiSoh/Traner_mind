@@ -1,6 +1,5 @@
 import React from "react";
 import { Label, Input, FormGroup, Form, Col } from "reactstrap";
-// import SwitchButton from "lyef-switch-button";
 
 const MarcketCreateInfoFirst = ({
   inpoInputValue,
@@ -10,8 +9,7 @@ const MarcketCreateInfoFirst = ({
   typeBusiness,
   typeBank,
   typeFranchise,
-  typeCorporIndi,
-  defaultValue
+  typeCorporIndi
 }) => {
   return (
     <Form className="MCreateStyle">
@@ -30,7 +28,6 @@ const MarcketCreateInfoFirst = ({
             className="infoSelect"
             onChange={inpoInputValue}
             name={typeCorporIndi}
-            // value={defaultValue}
           >
             <option value="corporate">법인</option>
             <option value="individual">개인</option>
@@ -101,4 +98,5 @@ const MarcketCreateInfoSecond = ({
     </Form>
   );
 };
+MarcketCreateInfoFirst.propTypes = {};
 export { MarcketCreateInfoFirst, MarcketCreateInfoSecond };

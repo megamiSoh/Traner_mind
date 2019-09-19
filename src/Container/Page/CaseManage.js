@@ -4,14 +4,23 @@ import {
   Table,
   BackBtn,
   MobileTable,
-  RegstBtn
+  RegstBtn,
+  Memo,
+  CancelMemo
 } from "../../Components/Ui";
 import * as routes from "../../Constants/routes";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as btnAction from "../../Modules/btnAction";
 import { Container } from "reactstrap";
+
 class CaseManage extends React.Component {
   constructor(props) {
     super(props);
+    // this.handleCancelMemo = this.props.btnAction.btnAction.bind(this);
     this.state = {
+      showMemo: false,
+      showCancelMemo: false,
       isDeviceCheck: false,
       productList: [
         "회원권",
@@ -99,8 +108,20 @@ class CaseManage extends React.Component {
     this.deviceCheck();
   }
 
+  handleCancelMemo = () => {
+    console.log(this.props.btnAction.btnAction());
+    console.log(this.props.show);
+    // this.props.btnAction.btnAction(!this.state.showCancelMemo);
+    this.setState({
+      showCancelMemo: !this.props.show
+    });
+  };
+  handleMemo = () => {
+    this.setState({
+      showMemo: !this.state.showMemo
+    });
+  };
   render() {
-    console.log(this.state.isDeviceCheck);
     return (
       <Container>
         <div className="caseManageWrap">
@@ -108,14 +129,20 @@ class CaseManage extends React.Component {
           <CaseSearch productList={this.state.productList} />
           {this.state.isDeviceCheck ? (
             <div>
-              <MobileTable RevenueList={this.state.RevenueList} />
+              <MobileTable
+                RevenueList={this.state.RevenueList}
+                handleClick={this.handleCancelMemo}
+              />
               <div className="btnWrap">
                 <BackBtn btn={"돌아가기"} location={routes.MARCKETMANAGE} />
               </div>
             </div>
           ) : (
             <div>
-              <Table revenueList={this.state.RevenueList} />
+              <Table
+                revenueList={this.state.RevenueList}
+                openMemo={this.handleMemo}
+              />
               <p>
                 *본 페이지의 임의취소는 App상의 임의 취소로{" "}
                 <span className="pointColor">
@@ -124,17 +151,49 @@ class CaseManage extends React.Component {
                 반영되기 어려워{" "}
                 <span className="pointColor">수동 취소를 하기 위한 절차</span>입니다.
               </p>
-              {/* <Btn /> */}
+              {/* <Memo
+                showMemo={this.state.showMemo}
+                handleMemo={this.handleMemo}
+                title={"특이사항"}
+                title2={"입력창"}
+                btnTitle={"닫기"}
+                memoTitle={"메모"}
+              />
+              <CancelMemo /> */}
               <div className="btnWrap">
                 <BackBtn btn={"돌아가기"} location={routes.MARCKETMANAGE} />
-                <RegstBtn btn={"임의취소"} />
+                <RegstBtn btn={"임의취소"} onClick={this.handleCancelMemo} />
               </div>
             </div>
           )}
+          <Memo
+            showMemo={this.state.showMemo}
+            handleMemo={this.handleMemo}
+            title={"특이사항"}
+            title2={"입력창"}
+            btnTitle={"닫기"}
+            memoTitle={"메모"}
+          />
+          <CancelMemo
+            showMemo={this.state.showCancelMemo}
+            handleMemo={this.handleCancelMemo}
+            idTitle={"요청자 ID"}
+            title={"특이사항"}
+            btnTitle={"취소진행"}
+            memoTitle={"임의취소"}
+          />
         </div>
       </Container>
     );
   }
 }
 
-export default CaseManage;
+export default connect(
+  state => ({
+    show: state.btn.get("show")
+  }),
+  dispatch => ({
+    btnAction: bindActionCreators(btnAction, dispatch)
+  })
+)(CaseManage);
+// export default CaseManage;
