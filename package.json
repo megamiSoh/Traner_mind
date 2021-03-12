@@ -45,7 +45,7 @@
     "react-big-calendar": "^0.19.1",
     "react-date-range": "^1.0.0-alpha6",
     "react-day-picker": "^7.1.9",
-    "react-dev-utils": "^5.0.1",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.4.0",
     "react-firebase-file-uploader": "^2.4.1",
     "react-immutable-proptypes": "^2.1.0",
